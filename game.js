@@ -8,7 +8,7 @@ export default class Game {
   constructor(user1, user2) {
     this.user1 = user1;
     this.user2 = user2;
-    this.currentPlayer = "x";
+    this.currentPlayerSymbol = "x";
     this.board = this._constructBoard();
     this._displayNames();
   }
@@ -20,13 +20,9 @@ export default class Game {
   }
 
   _playInSquare(row, col) {
-    console.log(
-      this._currentPlayerName,
-      "is playing in ROW:",
-      row,
-      "COL:",
-      col
-    );
+    console.log(this.currentPlayerName, "is playing in ROW:", row, "COL:", col);
+
+    console.log(this._updateBoard(row, col));
 
     // TO DO 1: make sure square is empty
 
@@ -37,12 +33,17 @@ export default class Game {
     this._togglePlayer();
   }
 
-  set _updateBoard(row, col) {
+  _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
+    const selectedSquare = this.board[row - 1][col - 1];
+    console.log(selectedSquare, "<---- selected square's value");
+    if (!selectedSquare) {
+      this.board[row - 1][col - 1] = this.currentPlayerSymbol;
+    }
   }
 
   _togglePlayer() {
-    this.currentPlayer === "x"
+    this.currentPlayerSymbol === "x"
       ? (this.currentPlayer = "o")
       : (this.currentPlayer = "x");
     return this.currentPlayerName;
@@ -50,7 +51,7 @@ export default class Game {
 
   // this is called a 'getter' method
   get currentPlayerName() {
-    return this.currentPlayer === "x" ? this.user1 : this.user2;
+    return this.currentPlayerSymbol === "x" ? this.user1 : this.user2;
     // now we can access the current player's name by the property .currentPlayerName
     // see _togglePlayer() method for an example
   }
