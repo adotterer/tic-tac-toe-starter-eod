@@ -1,0 +1,108 @@
+#grid-container {
+  margin: 0 auto;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background-color: rgb(213, 213, 243);
+  width: 500px;
+  height: 500px;
+  grid-template-areas:
+    "1-1 1-2 1-3"
+    "main . sidebar"
+    "footer footer footer";
+  border: 1px solid white;
+}
+
+* {
+  transition: all 0.2s ease-in-out;
+  font-family: Arial, sans-serif;
+}
+input,
+button {
+  border-radius: 20px;
+  cursor: pointer;
+}
+#grid-container > div {
+  border: 1px solid white;
+}
+#grid-container > div:hover {
+  background-color: rgb(119, 119, 248);
+}
+.grid-1-1 {
+  grid-area: 1-1;
+}
+.grid-1-2 {
+  grid-area: 1-2;
+}
+.grid-1-3 {
+  grid-area: 1-3;
+}
+.grid-2-1 {
+  grid-area: 2-1;
+}
+.grid-2-2 {
+  grid-area: 2-2;
+}
+.grid-2-3 {
+  grid-area: 2-3;
+}
+.grid-3-1 {
+  grid-area: 3-1;
+}
+.grid-3-2 {
+  grid-area: 3-2;
+}
+.grid-3-3 {
+  grid-area: 3-3;
+}
+
+#name-form {
+  margin: 0 auto;
+  display: flex;
+  flex-basis: 2;
+  flex-wrap: wrap;
+  width: 50vw;
+  height: 20vh;
+  justify-content: space-between;
+  position: relative;
+  top: calc(40vh - 80px);
+}
+
+#name-form > div {
+  width: 100%;
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: space-around;
+}
+
+#name-form input {
+  border-radius: 10px;
+  height: 30px;
+  font-size: 20px;
+  padding: 5px;
+}
+
+#name-form input:active,
+#name-form input:focus {
+  /* border: none; */
+  outline: none;
+}
+
+#name-form button {
+  font-size: 22px;
+
+  padding: 10px;
+  margin-top: 20px;
+}
+
+#diplay-names {
+  display: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#game-controls {
+  display: none;
+  text-align: center;
+  justify-content: space-around;
+}
