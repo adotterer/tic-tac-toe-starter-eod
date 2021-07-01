@@ -15,14 +15,16 @@ export default class Game {
 
   // GAME LOGIC METHODS
   _constructBoard() {
-    const board = new Array(3);
-    return board.fill([null, null, null]);
+    const board = new Array(3).fill("");
+    return board.map(() => {
+      return [null, null, null];
+    });
   }
 
   _playInSquare(row, col) {
     console.log(this.currentPlayerName, "is playing in ROW:", row, "COL:", col);
 
-    console.log(this._updateBoard(row, col));
+    this._updateBoard(row, col);
 
     // TO DO 1: make sure square is empty
 
@@ -35,11 +37,15 @@ export default class Game {
 
   _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
-    const selectedSquare = this.board[row - 1][col - 1];
-    console.log(selectedSquare, "<---- selected square's value");
-    if (!selectedSquare) {
-      this.board[row - 1][col - 1] = this.currentPlayerSymbol;
-    }
+    // const selectedSquare = this.board[row - 1][col - 1];
+    console.log(this.board, "this.board");
+    // console.log(selectedSquare, "<---- selected square's value");
+    // if (!selectedSquare) {
+    //   // this.board[row - 1][col - 1] = this.currentPlayerSymbol;
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   }
 
   _togglePlayer() {
