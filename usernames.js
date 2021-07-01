@@ -14,7 +14,6 @@ export function validateInputs() {
 }
 
 export function beginNewGame() {
-  document.querySelector("form").style.display = "none";
-  document.querySelector("#grid-container").style.display = "grid";
-  return new Game(user1.value, user2.value);
+  const game = new Game(user1.value, user2.value);
+  return game.toggleFormGridDisplay();
 }
