@@ -24,26 +24,22 @@ export default class Game {
   _playInSquare(row, col) {
     console.log(this.currentPlayerName, "is playing in ROW:", row, "COL:", col);
 
-    this._updateBoard(row, col);
+    this._updateBoard(row, col) && this._togglePlayer();
 
     // TO DO 1: make sure square is empty
 
     // TO DO 2: update this.board
 
     // TO DO 3: update DOM
-
-    this._togglePlayer();
   }
 
   _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
     const selectedSquare = this.board[row - 1][col - 1];
-    console.log(this.board, "this.board");
-    // console.log(selectedSquare, "<---- selected square's value");
     if (!selectedSquare) {
       this.board[row - 1][col - 1] = this.currentPlayerSymbol;
       console.log("updated board--->", this.board);
-
+      this._displayToken(row, col);
       return true;
     } else {
       return false;
@@ -96,7 +92,17 @@ export default class Game {
     document.querySelector("#game-controls").style.display = "flex";
   }
 
-  _displayToken() {
+  _displayToken(row, col) {
     // YOUR CODE HERE (TO DO 2)
+    const selectedDOMSquare = document.querySelector(`.grid-${row}-${col}`);
+    console.log(selectedDOMSquare, "selected square");
+
+    const symbolToken = document.createElement("img");
+
+    this.currentPlayerSymbol === "x"
+      ? (symbolToken.src = xURL)
+      : (symbolToken.src = oURL);
+
+    selectedDOMSquare.appendChild(symbolToken);
   }
 }
