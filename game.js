@@ -35,11 +35,6 @@ export default class Game {
 
   _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
-    const selectedSquare = this.board[row - 1][col - 1];
-    console.log(selectedSquare, "<---- selected square's value");
-    if (!selectedSquare) {
-      this.board[row - 1][col - 1] = this.currentPlayerSymbol;
-    }
   }
 
   _togglePlayer() {
