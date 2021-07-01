@@ -13,13 +13,6 @@ function constructGame(event) { // event is passed from the button's "click" eve
   }
 }
 
-const x =
-  "https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-x.svg";
-
-const o =
-  "https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-o.svg";
-
-
 window.addEventListener("DOMContentLoaded", () => {
   const startGameButton = document.querySelector("button.usernames-button");
   startGameButton.addEventListener("click", constructGame);
