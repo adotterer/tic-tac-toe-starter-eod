@@ -27,7 +27,18 @@ export default class Game {
       "COL:",
       col
     );
+
+    // TO DO 1: make sure square is empty
+
+    // TO DO 2: update this.board
+
+    // TO DO 3: update DOM
+
     this._togglePlayer();
+  }
+
+  set _updateBoard(row, col) {
+    // YOUR CODE HERE (TO DO 1 & 2)
   }
 
   _togglePlayer() {
@@ -74,5 +85,9 @@ export default class Game {
     span2.innerHTML = this.user2;
     document.querySelector("#diplay-names").style.display = "block";
     document.querySelector("#game-controls").style.display = "flex";
+  }
+
+  _displayToken() {
+    // YOUR CODE HERE (TO DO 2)
   }
 }
