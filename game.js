@@ -15,8 +15,10 @@ export default class Game {
 
   // GAME LOGIC METHODS
   _constructBoard() {
-    const board = new Array(3);
-    return board.fill([null, null, null]);
+    const board = new Array(3).fill("");
+    return board.map(() => {
+      return [null, null, null];
+    });
   }
 
   _playInSquare(row, col) {
