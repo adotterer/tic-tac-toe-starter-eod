@@ -41,8 +41,8 @@ export default class Game {
 
   _togglePlayer() {
     this.currentPlayerSymbol === "x"
-      ? (this.currentPlayer = "o")
-      : (this.currentPlayer = "x");
+      ? (this.currentPlayerSymbol = "o")
+      : (this.currentPlayerSymbol = "x");
     return this.currentPlayerName;
   }
 
