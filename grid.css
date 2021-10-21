@@ -16,6 +16,7 @@
 #grid-container > div {
   border: 1px solid white;
   padding: 10px;
+  transition: all 0.2s ease-in-out;
 }
 #grid-container > div.square:hover {
   background-color: rgb(119, 119, 248);
@@ -49,5 +50,11 @@
 }
 
 img {
-  transition: opacity 0.4 linear;
+  transition: all 0.2s linear;
+}
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

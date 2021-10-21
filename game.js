@@ -4,6 +4,15 @@ const xURL =
 const oURL =
   "https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-o.svg";
 
+function smoothElementLoad(ele) {
+  ele.style.opacity = 0.1;
+  ele.style.width = "1%";
+  setTimeout(() => {
+    ele.style.opacity = 1;
+    ele.style.width = "85%";
+  }, 80);
+}
+
 export default class Game {
   constructor(user1, user2) {
     this.user1 = user1;
@@ -20,6 +29,7 @@ export default class Game {
 
     game.board = savedGame.board;
     game.winner = savedGame.winner;
+    game.currentPlayerSymbol = savedGame.currentPlayerSymbol;
 
     game.toggleFormGridDisplay();
     game._attachEventListeners();
@@ -45,14 +55,12 @@ export default class Game {
             `.grid-${row + 1}-${col + 1}`
           );
           const symbolToken = document.createElement("img");
-          symbolToken.style.opacity = 0;
+
           this.board[row][col] === "x"
             ? (symbolToken.src = xURL)
             : (symbolToken.src = oURL);
+          smoothElementLoad(symbolToken);
           squareToFill.appendChild(symbolToken);
-          setTimeout(() => {
-            symbolToken.style.opacity = 1;
-          }, 300);
         }
       }
     }
@@ -132,6 +140,19 @@ export default class Game {
   _attachEventListeners() {
     // const squares = document.querySelectorAll("div.square");
     const squares = Array.from(document.getElementsByClassName("square"));
+    const newGameButton = document.querySelector(".new-game");
+    const giveUpButton = document.querySelector(".give-up");
+
+    newGameButton.addEventListener("click", (e) => {
+      localStorage.clear();
+      window.location.reload();
+    });
+
+    giveUpButton.addEventListener("click", () => {
+      this._togglePlayer();
+      this.winner = this.currentPlayerSymbol;
+      this._showWinner();
+    });
 
     squares.forEach((sqr) =>
       sqr.addEventListener("click", (e) => {
@@ -159,7 +180,7 @@ export default class Game {
     this.currentPlayerSymbol === "x"
       ? (symbolToken.src = xURL)
       : (symbolToken.src = oURL);
-
+    smoothElementLoad(symbolToken);
     selectedDOMSquare.appendChild(symbolToken);
   }
 

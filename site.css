@@ -1,7 +1,7 @@
 @import url(./grid.css);
 
 * {
-  transition: all 0.2s ease-in-out;
+
   font-family: Arial, sans-serif;
 }
 input,
