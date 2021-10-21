@@ -1,17 +1,4 @@
-const xURL =
-  "https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-x.svg";
-
-const oURL =
-  "https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-o.svg";
-
-function smoothElementLoad(ele) {
-  ele.style.opacity = 0.1;
-  ele.style.width = "1%";
-  setTimeout(() => {
-    ele.style.opacity = 1;
-    ele.style.width = "85%";
-  }, 80);
-}
+import { xURL, oURL, smoothElementLoad } from "./utils.js";
 
 export default class Game {
   constructor(user1, user2) {
@@ -129,6 +116,10 @@ export default class Game {
     // see _togglePlayer() method for an example
   }
 
+  get winnerName() {
+    return this.winner === "x" ? this.user1 : this.user2;
+  }
+
   // DOM MANIPULATION METHODS
   toggleFormGridDisplay() {
     document.querySelector("form").style.display = "none";
@@ -172,7 +163,6 @@ export default class Game {
   }
 
   _displayToken(row, col) {
-    // YOUR CODE HERE (TO DO 2)
     const selectedDOMSquare = document.querySelector(`.grid-${row}-${col}`);
 
     const symbolToken = document.createElement("img");
@@ -188,8 +178,8 @@ export default class Game {
     if (!this.winner) return;
     const h2Msg = document.querySelector("#display-names h2");
     document.querySelector("#display-names h2");
-    console.log(h2Msg);
-    h2Msg.innerText = "Winner is " + this.winner;
+    // smoothElementLoad(h2Msg);
+    h2Msg.innerText = "Winner is " + this.winnerName;
   }
 
   _storeGame() {
