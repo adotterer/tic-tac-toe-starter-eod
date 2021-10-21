@@ -37,7 +37,6 @@ export default class Game {
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 3; col++) {
         if (this.board[row][col]) {
-          console.log("row", row, "col", col);
           const squareToFill = document.querySelector(
             `.grid-${row + 1}-${col + 1}`
           );

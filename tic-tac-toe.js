@@ -15,7 +15,6 @@ function constructGame(event) {
 
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("game")) {
-    game = JSON.parse(localStorage.getItem("game"));
     Game.loadGame();
   } else {
     const startGameButton = document.querySelector("button.usernames-button");
