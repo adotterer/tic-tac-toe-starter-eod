@@ -141,6 +141,6 @@ export default class Game {
     const h2Msg = document.querySelector("#display-names h2");
     document.querySelector("#display-names h2");
     console.log(h2Msg);
-    h2Msg.innerText = "Winner is" + this.winner;
+    h2Msg.innerText = "Winner is " + this.winner;
   }
 }
