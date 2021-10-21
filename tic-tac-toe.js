@@ -1,4 +1,5 @@
 import { validateInputs, beginNewGame } from "./usernames.js";
+import Game from "./game.js";
 
 let game;
 
@@ -13,6 +14,13 @@ function constructGame(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const startGameButton = document.querySelector("button.usernames-button");
-  startGameButton.addEventListener("click", constructGame);
+  if (localStorage.getItem("game")) {
+    game = JSON.parse(localStorage.getItem("game"));
+    console.log(game);
+ 
+    Game.loadGame();
+  } else {
+    const startGameButton = document.querySelector("button.usernames-button");
+    startGameButton.addEventListener("click", constructGame);
+  }
 });

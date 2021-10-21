@@ -14,6 +14,6 @@ export function validateInputs() {
 }
 
 export function beginNewGame() {
-  const game = new Game(user1.value, user2.value);
+  let game = new Game(user1.value, user2.value);
   return game.toggleFormGridDisplay();
 }

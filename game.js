@@ -14,12 +14,44 @@ export default class Game {
     this._displayNames();
   }
 
+  static loadGame() {
+    const savedGame = JSON.parse(localStorage.getItem("game"));
+    const game = new this(savedGame.user1, savedGame.user2);
+
+    game.board = savedGame.board;
+    game.winner = savedGame.winner;
+
+    game.toggleFormGridDisplay();
+    game._attachEventListeners();
+    game._fillBoard();
+    game._showWinner();
+    return game;
+  }
+
   // GAME LOGIC METHODS
   _constructBoard() {
     const board = new Array(3).fill("");
     return board.map(() => {
       return [null, null, null];
     });
+  }
+
+  _fillBoard() {
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 3; col++) {
+        if (this.board[row][col]) {
+          console.log("row", row, "col", col);
+          const squareToFill = document.querySelector(
+            `.grid-${row + 1}-${col + 1}`
+          );
+          const symbolToken = document.createElement("img");
+          this.board[row][col] === "x"
+            ? (symbolToken.src = xURL)
+            : (symbolToken.src = oURL);
+          squareToFill.appendChild(symbolToken);
+        }
+      }
+    }
   }
   // [[null,null,null],[x2],[x3]]
 
@@ -29,6 +61,7 @@ export default class Game {
     this._updateBoard(row, col) && this._togglePlayer();
     this._checkForWin();
     if (this.winner) this._showWinner();
+    this._storeGame();
     // TODO: check for win
     // display winner
     // TODO: implement local storage
@@ -99,16 +132,10 @@ export default class Game {
   _attachEventListeners() {
     // const squares = document.querySelectorAll("div.square");
     const squares = Array.from(document.getElementsByClassName("square"));
-    console.log(squares, "<------squares");
 
     squares.forEach((sqr) =>
       sqr.addEventListener("click", (e) => {
-        // console.log("the classes of the ", e.target.classList);
         const [_squareClass, squarePosition] = e.target.classList;
-        // console.log(
-        //   squarePosition,
-        //   "<--- square position, ie the player's move"
-        // );
         const [_gridLabel, row, column] = squarePosition.split("-");
         this._playInSquare(row, column);
       })
@@ -138,9 +165,14 @@ export default class Game {
   }
 
   _showWinner() {
+    if (!this.winner) return;
     const h2Msg = document.querySelector("#display-names h2");
     document.querySelector("#display-names h2");
     console.log(h2Msg);
     h2Msg.innerText = "Winner is " + this.winner;
+  }
+
+  _storeGame() {
+    localStorage.setItem("game", JSON.stringify(this));
   }
 }
