@@ -45,15 +45,18 @@ export default class Game {
             `.grid-${row + 1}-${col + 1}`
           );
           const symbolToken = document.createElement("img");
+          symbolToken.style.opacity = 0;
           this.board[row][col] === "x"
             ? (symbolToken.src = xURL)
             : (symbolToken.src = oURL);
           squareToFill.appendChild(symbolToken);
+          setTimeout(() => {
+            symbolToken.style.opacity = 1;
+          }, 300);
         }
       }
     }
   }
-  // [[null,null,null],[x2],[x3]]
 
   _playInSquare(row, col) {
     console.log(this.currentPlayerName, "is playing in ROW:", row, "COL:", col);
@@ -62,9 +65,6 @@ export default class Game {
     this._checkForWin();
     if (this.winner) this._showWinner();
     this._storeGame();
-    // TODO: check for win
-    // display winner
-    // TODO: implement local storage
   }
 
   _checkForWin() {
@@ -135,7 +135,7 @@ export default class Game {
 
     squares.forEach((sqr) =>
       sqr.addEventListener("click", (e) => {
-        const [_squareClass, squarePosition] = e.target.classList;
+        const [_squareClass, squarePosition] = e.currentTarget.classList;
         const [_gridLabel, row, column] = squarePosition.split("-");
         this._playInSquare(row, column);
       })
@@ -153,7 +153,6 @@ export default class Game {
   _displayToken(row, col) {
     // YOUR CODE HERE (TO DO 2)
     const selectedDOMSquare = document.querySelector(`.grid-${row}-${col}`);
-    // console.log(selectedDOMSquare, "selected square");
 
     const symbolToken = document.createElement("img");
 

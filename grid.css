@@ -47,3 +47,7 @@
 .grid-3-3 {
   grid-area: 3-3;
 }
+
+img {
+  transition: opacity 0.4 linear;
+}
