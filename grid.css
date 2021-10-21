@@ -15,8 +15,9 @@
 
 #grid-container > div {
   border: 1px solid white;
+  padding: 10px;
 }
-#grid-container > div:hover {
+#grid-container > div.square:hover {
   background-color: rgb(119, 119, 248);
 }
 .grid-1-1 {

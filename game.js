@@ -9,6 +9,7 @@ export default class Game {
     this.user1 = user1;
     this.user2 = user2;
     this.currentPlayerSymbol = "x";
+    this.winner = "";
     this.board = this._constructBoard();
     this._displayNames();
   }
@@ -20,25 +21,52 @@ export default class Game {
       return [null, null, null];
     });
   }
+  // [[null,null,null],[x2],[x3]]
 
   _playInSquare(row, col) {
     console.log(this.currentPlayerName, "is playing in ROW:", row, "COL:", col);
 
     this._updateBoard(row, col) && this._togglePlayer();
+    this._checkForWin();
+    if (this.winner) this._showWinner();
+    // TODO: check for win
+    // display winner
+    // TODO: implement local storage
+  }
 
-    // TO DO 1: make sure square is empty
+  _checkForWin() {
+    const [[sq1, sq2, sq3], [sq4, sq5, sq6], [sq7, sq8, sq9]] = this.board;
+    const row1 = sq1 + sq2 + sq3;
+    const row2 = sq4 + sq5 + sq6;
+    const row3 = sq7 + sq8 + sq9;
+    const col1 = sq1 + sq4 + sq7;
+    const col2 = sq2 + sq5 + sq8;
+    const col3 = sq3 + sq6 + sq9;
+    const diag1 = sq1 + sq5 + sq9;
+    const diag2 = sq3 + sq5 + sq7;
 
-    // TO DO 2: update this.board
-
-    // TO DO 3: update DOM
+    if (
+      [row1, row2, row3, col1, col2, col3, diag1, diag2].some(
+        (tokens) => tokens === "xxx"
+      )
+    ) {
+      this.winner = "x";
+    } else if (
+      [row1, row2, row3, col1, col2, col3, diag1, diag2].some(
+        (tokens) => tokens === "ooo"
+      )
+    ) {
+      this.winner = "o";
+    }
   }
 
   _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
     const selectedSquare = this.board[row - 1][col - 1];
+
     if (!selectedSquare) {
       this.board[row - 1][col - 1] = this.currentPlayerSymbol;
-      console.log("updated board--->", this.board);
+      // console.log("updated board--->", this.board);
       this._displayToken(row, col);
       return true;
     } else {
@@ -69,7 +97,10 @@ export default class Game {
   }
 
   _attachEventListeners() {
-    const squares = document.querySelectorAll("div.square");
+    // const squares = document.querySelectorAll("div.square");
+    const squares = Array.from(document.getElementsByClassName("square"));
+    console.log(squares, "<------squares");
+
     squares.forEach((sqr) =>
       sqr.addEventListener("click", (e) => {
         // console.log("the classes of the ", e.target.classList);
@@ -88,14 +119,14 @@ export default class Game {
     const [span1, span2] = document.querySelectorAll("span.user");
     span1.innerHTML = this.user1;
     span2.innerHTML = this.user2;
-    document.querySelector("#diplay-names").style.display = "block";
+    document.querySelector("#display-names").style.display = "block";
     document.querySelector("#game-controls").style.display = "flex";
   }
 
   _displayToken(row, col) {
     // YOUR CODE HERE (TO DO 2)
     const selectedDOMSquare = document.querySelector(`.grid-${row}-${col}`);
-    console.log(selectedDOMSquare, "selected square");
+    // console.log(selectedDOMSquare, "selected square");
 
     const symbolToken = document.createElement("img");
 
@@ -104,5 +135,12 @@ export default class Game {
       : (symbolToken.src = oURL);
 
     selectedDOMSquare.appendChild(symbolToken);
+  }
+
+  _showWinner() {
+    const h2Msg = document.querySelector("#display-names h2");
+    document.querySelector("#display-names h2");
+    console.log(h2Msg);
+    h2Msg.innerText = "Winner is" + this.winner;
   }
 }
