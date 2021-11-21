@@ -1,5 +1,6 @@
 import Game from "./game.js";
 const inputs = document.querySelectorAll("input");
+// inputs => NodeList
 const [user1, user2] = inputs;
 
 export function validateInputs() {

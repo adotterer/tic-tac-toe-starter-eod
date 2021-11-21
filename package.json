@@ -1,0 +1,20 @@
+{
+  "name": "tic-tac-toe-starter-eod",
+  "version": "1.0.0",
+  "description": "Welcome to the Tic-Tac-Toe project! In this project, you will create a well-designed HTML+CSS+JS browser-based application that will allow you to play [tic-tac-toe]. It will combine all of the concepts that you learned in browser basics, element selection and handling, and storage.",
+  "main": "game.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adotterer/tic-tac-toe-starter-eod.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adotterer/tic-tac-toe-starter-eod/issues"
+  },
+  "homepage": "https://github.com/adotterer/tic-tac-toe-starter-eod#readme"
+}

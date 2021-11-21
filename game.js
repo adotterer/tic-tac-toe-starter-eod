@@ -2,15 +2,15 @@ import { xURL, oURL, smoothElementLoad } from "./utils.js";
 
 export default class Game {
   constructor(user1, user2) {
-    this.user1 = user1;
+    this.user1 = user1; // username
     this.user2 = user2;
     this.currentPlayerSymbol = "x";
     this.winner = "";
-    this.board = this._constructBoard();
+    this.board = this._constructBoard(); // [[]]
     this._displayNames();
   }
 
-  static loadGame() {
+  static loadGame() { // can only be called Game, not an instance
     const savedGame = JSON.parse(localStorage.getItem("game"));
     const game = new this(savedGame.user1, savedGame.user2);
 
@@ -31,9 +31,11 @@ export default class Game {
     return board.map(() => {
       return [null, null, null];
     });
+    // [[null,null,null],[x3 null],[x3 null]];
   }
 
   _fillBoard() {
+    //
     for (let row = 0; row < 3; row++) {
       for (let col = 0; col < 3; col++) {
         if (this.board[row][col]) {
@@ -90,6 +92,7 @@ export default class Game {
   _updateBoard(row, col) {
     // YOUR CODE HERE (TO DO 1 & 2)
     const selectedSquare = this.board[row - 1][col - 1];
+    // this.board = [['x', null, null],etc]
 
     if (!selectedSquare) {
       this.board[row - 1][col - 1] = this.currentPlayerSymbol;
@@ -122,7 +125,7 @@ export default class Game {
   // DOM MANIPULATION METHODS
   toggleFormGridDisplay() {
     document.querySelector("form").style.display = "none";
-    document.querySelector("#grid-container").style.display = "grid";
+    document.querySelector("#grid-container").style.display = "grid"; // "none" => "grid"
     this._attachEventListeners();
     return this;
   }
@@ -133,7 +136,7 @@ export default class Game {
     const newGameButton = document.querySelector(".new-game");
     const giveUpButton = document.querySelector(".give-up");
 
-    newGameButton.addEventListener("click", (e) => {
+    newGameButton.addEventListener("click", () => {
       localStorage.clear();
       window.location.reload();
     });
@@ -177,7 +180,6 @@ export default class Game {
     if (!this.winner) return;
     const h2Msg = document.querySelector("#display-names h2");
     document.querySelector("#display-names h2");
-    // smoothElementLoad(h2Msg);
     h2Msg.innerText = "Winner is " + this.winnerName;
   }
 
