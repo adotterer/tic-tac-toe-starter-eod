@@ -6,10 +6,10 @@ export const oURL =
 
 export function smoothElementLoad(ele) {
   ele.style.opacity = 0.1; // basically transparent
-  ele.style.width = "1%";
+  ele.style.maxWidth = "1%";
   setTimeout(() => {
     ele.style.opacity = 1;
-    ele.style.width = "85%";
+    ele.style.maxWidth = "85%";
   }, 20);
   return ele
 }
