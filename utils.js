@@ -10,5 +10,6 @@ export function smoothElementLoad(ele) {
   setTimeout(() => {
     ele.style.opacity = 1;
     ele.style.width = "85%";
-  }, 40);
+  }, 20);
+  return ele
 }

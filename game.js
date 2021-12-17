@@ -47,8 +47,8 @@ export default class Game {
           this.board[row][col] === "x"
             ? (symbolToken.src = xURL)
             : (symbolToken.src = oURL);
-          smoothElementLoad(symbolToken);
-          squareToFill.appendChild(symbolToken);
+          
+          squareToFill.appendChild(smoothElementLoad(symbolToken));
         }
       }
     }
@@ -95,6 +95,7 @@ export default class Game {
     // this.board = [['x', null, null],etc]
 
     if (!selectedSquare) {
+      // 1 1 
       this.board[row - 1][col - 1] = this.currentPlayerSymbol;
       // console.log("updated board--->", this.board);
       this._displayToken(row, col);
@@ -149,8 +150,10 @@ export default class Game {
 
     squares.forEach((sqr) =>
       sqr.addEventListener("click", (e) => {
+        console.log("line 152", e.currentTarget.classList)
         const [_squareClass, squarePosition] = e.currentTarget.classList;
         const [_gridLabel, row, column] = squarePosition.split("-");
+        console.log(row, column)
         this._playInSquare(row, column);
       })
     );

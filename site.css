@@ -58,3 +58,15 @@ button {
   text-align: center;
   justify-content: space-around;
 }
+
+.token-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.token-img img {
+  display: block;
+  height: 2em;
+  width: 2em;
+  padding: 5px;
+}

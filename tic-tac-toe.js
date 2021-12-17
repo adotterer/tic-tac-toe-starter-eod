@@ -15,7 +15,7 @@ function constructGame(event) {
 
 window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("game")) {
-    Game.loadGame(); // static method --> Game.loadGame()
+    game = Game.loadGame(); // static method --> Game.loadGame()
   } else {
     const startGameButton = document.querySelector("button.usernames-button");
     startGameButton.addEventListener("click", constructGame);
